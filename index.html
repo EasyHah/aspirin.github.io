@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>植物信息展示 - 隐藏侧边栏导航菜单效果</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/menu_elastic.css" />
+    <script src="js/snap.svg-min.js"></script>
+    <style>
+        .begin {
+            width: 100%;
+            height: 100%;
+            background-image: url('img/plant-img/plant1 (33).jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .end{
+			width: 100%;
+            height: 100%;
+            background-image: url('img/image.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+		}
+        .plant-info {
+            display: flex;
+            align-items: flex-start;
+            margin: 20px;
+        }
+        .plant-info img {
+            max-width: 100%;
+            height: auto;
+        }
+        .plant-info h2 {
+            margin-top: 0;
+        }
+        .map-container {
+            position: fixed;
+            top: 100px;
+            left: 120px;
+            height: 300px;
+            width: 800px;
+        }
+        .map {
+            width: 100%;
+            height: 500px;
+            transition: opacity 1s;
+            opacity: 1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* 添加图片周围的虚化效果 */
+            border-radius: 10px; /* 可选：添加圆角效果 */
+        }
+        .map.fade-out {
+            opacity: 0;
+        }
+        .text-content {
+            margin-right: 20px;
+            margin-left: 1000px;
+            padding-top: 20px;
+        }
+        .text-section {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .text-section h2 {
+            font-family: 'KaiTi', '楷体', 'KaiTi_GB2312', sans-serif;
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: white; /* 设置字体颜色为白色 */
+        }
+        .text-section p {
+            margin-top: 20px;
+            font-size: 18px;
+            color: white; /* 设置字体颜色为白色 */
+        }
+        a {
+            color: white; /* 设置超链接颜色为白色 */
+            text-decoration: none; /* 去掉超链接下划线 */
+        }
+        a:hover {
+            color: #ddd; /* 鼠标悬停时超链接颜色 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="menu-wrap">
+            <nav class="menu">
+                <div class="icon-list">
+                    <a href="#plant1"><i class="fa fa-fw fa-leaf"></i><span>Plant 1</span></a>
+                    <a href="#plant2"><i class="fa fa-fw fa-leaf"></i><span>Plant 2</span></a>
+                    <a href="#plant3"><i class="fa fa-fw fa-leaf"></i><span>Plant 3</span></a>
+                    <a href="#plant4"><i class="fa fa-fw fa-leaf"></i><span>Plant 4</span></a>
+                    <a href="#plant5"><i class="fa fa-fw fa-leaf"></i><span>Plant 5</span></a>
+                    <a href="#budao"><i class="fa fa-fw fa-leaf"></i><span>上方山步道3D游览</span></a>
+                </div>
+            </nav>
+            <button class="close-button" id="close-button">Close Menu</button>
+            <div class="morph-shape" id="morph-shape" data-morph-open="M-1,0h101c0,0,0-1,0,395c0,404,0,405,0,405H-1V0z">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                    <path d="M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z"/>
+                </svg>
+            </div>
+        </div>
+        <button class="menu-button" id="open-button">Open Menu</button>
+        <div class="content-wrap">
+            <div class="begin">
+                <div id="shangfang" class="text-section">
+                    <h2>上方山国家森林公园</h2>
+                    <p>上方山国家森林公园位于北京市房山区韩村河镇圣水峪村北，<br>
+                    距离北京市中心约70 km，距离韩村河镇政府16 km，距周口店20 km。<br>
+                    森林公园北起眺卢峯，南至狮子峯，西起紫金峯，东至怡村山。<br>
+                    其地理坐标为北纬39°39'42'' ~ 39°40'50''，东经115°48'2'' ~ 115°49'50''。<br>
+                    园区总面积约329.3 hm²，平均海拔高度400 m以上。</p>
+                </div>
+            </div>
+            <div class="content">
+                <div class="map-container">
+                    <img id="current-map" src="" class="map" alt="Map">
+                </div>
+                <div class="text-content">
+                    <div id="plant1" class="text-section">
+                        <h2>黄栌</h2>
+                        <p>黄栌（Cotinus coggygria Scop.）是漆树科黄栌属的落叶小乔木或灌木植物。
+                            它的树冠呈圆形，木质部黄色，树汁有异味。黄栌的叶片为倒卵形或卵圆形，
+                            叶柄细长，没有托叶。花朵小而杂性，圆锥花序疏松、顶生，仅少数发育；不
+                            育花的花梗花后伸长，被羽状长柔毛，宿存。核果小且干燥，肾形扁平，绿色。</p>
+                    </div>
+                    <div id="plant2" class="text-section">
+                        <h2>中华卷柏</h2>
+                        <p>中华卷柏是一种土生或旱生的蕨类植物，属于卷柏科卷柏属。
+                            它的学名是Selaginella sinensis (Desv.) Spring。中华卷柏具有以下特征和习性：<br>
+                            形态特征：主茎通体羽状分枝，不呈“之”字形，无关节，茎圆柱状，光滑无毛，内具维管
+                            束1条。侧枝多，小枝稀疏，规则排列，分枝无毛，背腹压扁。叶全部交互排列，略二形，纸
+                            质，表面光滑，边缘不为全缘，具白边。分枝上的腋叶对称，窄倒卵形，中叶多少对称，小枝上
+                            的卵状椭圆形，排列紧密。侧叶多少对称，略上斜。孢子叶穗紧密，四棱柱形，单个或成对生于
+                            小枝末端，孢子叶一形，卵形，边缘具睫毛，有白边，先端急尖，龙骨状；大孢子白色；小孢子橘
+                            红色。<br>
+                            中华卷柏因其顽强的生命力和独特的生长习性，被誉为“九死还魂草”，不仅在自然界中占据
+                            一席之地，也逐渐成为人们生活中的一部分，被应用于美化环境和净化空气等方面。</p>
+                    </div>
+                    <div id="plant3" class="text-section">
+                        <h2>黄精</h2>
+                        <p>黄精（学名：Polygonatum sibiricum Delar. ex Redoute）是天门冬科、黄精属多年生草本，茎为
+                            根状；节膨大，节间一头粗、一头细，粗头有短分枝；叶4~6枚轮生，线状披针形，先端拳卷或弯曲；花
+                            序常具2—4花，成伞状，花序梗长，俯垂：苞片生于花梗基部，膜质，钻形或线状披针形，花被乳白或淡黄
+                            黄色并且筒中部稍缢缩；浆果成熟时为黑色。花期5—6月，果期8—9月。《抱朴子》中记载：“昔人以本品得
+                            坤土之气，获天地之精，故名。”
+                            </p>
+                    </div>
+                    <div id="plant4" class="text-section">
+                        <h2>绣线菊</h2>
+                        <p>绣线菊是一种属于蔷薇科的灌木植物，具有多种别称，如蚂蝗草、珍珠梅、马尿骚等。它主要分布在东亚、欧洲东南部以
+                            及北美等地，尤其在中国、蒙古、日本、朝鲜半岛、俄罗斯、西伯利亚和欧洲东南部等地较为常见。绣线菊的形态特征包
+                            括直立灌木的体态，高度通常在1-2米之间，小枝被柔毛，老时脱落，冬芽有数枚褐色外露鳞片，疏被柔毛。叶片通常为长圆状
+                            披针形或披针形，花序为长圆形或金字塔形的圆锥花序，花瓣粉红色，花期通常在6月至8月，果期在8月至9月。</p>
+                    </div>
+                    <div id="plant5" class="text-section">
+                        <h2>铁线蕨</h2>
+                        <p>铁线蕨（Adiantum capillus-veneris L）是一种多年生草本植物，属于铁线蕨科铁线蕨属。
+                            它的根状茎横走，被有棕色披针形鳞片，叶片呈卵状三角形，顶端钝圆并有细锯齿，叶脉扇
+                            状分叉。铁线蕨以其独特的形态特征和生长习性，成为了植物界的璀璨明珠。
+                            </p>
+                    </div>
+                    <div id="plant6" class="text-section">
+                        <h2>银胶菊</h2>
+                        <p>银胶菊是一种属于菊科银胶菊属的一年生草本植物，其学名是Parthenium hysterophorus L。这种植物的分
+                            布范围广泛，原产于美洲热带地区，但现已入侵包括中国在内的多个地区，如山东、福建、广东、广西、海南
+                            、香港等。银胶菊具有较强的生长和繁殖能力，通常通过籽实进行繁殖和传播。
+                            </p>
+                    </div>
+                    <div id="plant7" class="text-section">
+                        <h2>展枝唐松草</h2>
+                        <p>展枝唐松草，中药名，为毛茛科唐松草属植物展枝唐松草Thalictrum squarrosum Steph.的根及根茎或全草。
+                            这种植物主要分布于我国陕西北部、山西、河北北部、内蒙古、辽宁、吉林、黑龙江等地。展枝唐松草具有清热解
+                            毒、制酸的功效，主治急性结膜炎、传染性肝炎、痢疾、胃病吐酸等疾病。其性味为味苦，性平，归肝、大肠经。内服
+                            时，一般采用煎汤的方式，用量为3-10g。展枝唐松草被认为是有毒的，因此在使用时应遵循医嘱，确保安全有效。
+                            此外，展枝唐松草不仅在中医药领域有所应用，其株姿优雅飘逸，质感轻柔，还适用于花境中景配植，也适于疏林
+                            下丛植或自然栽植，亦可布置庭园及岩石园，具有一定的观赏价值。在东北地区，展枝唐松草还被视为一种珍稀的山野菜，
+                            采摘后用开水焯一下炒食或沾酱食用，其口感极好，气味浓郁、清香，逐渐成为餐桌上的高档山野菜之一。猫爪子富含多种
+                            维生素和微量元素，极具保健功效，同时具有清热解毒、健胃治酸、抗癌等诸多药用功能。</p>
+                    </div>
+                    <div id="plant8" class="text-section">
+                        <h2>欧洲铁木</h2>
+                        <p>欧洲铁木，也被称为欧洲山毛榉，是一种常见的硬木树种，属于榆科。这种木材以其出色的物理性能和美观的外观而闻名，
+                            被广泛用于家具制造、地板、装饰单板以及各种木工制品。欧洲铁木的特点包括其坚硬的材质、均匀的纹理以及良好的耐
+                            久性。它的颜色通常为浅棕色，随着时间的使用，木材的颜色会逐渐变深，形成独特的自然色调。
+                            </p>
+                    </div>
+                    <div id="plant9" class="text-section">
+                        <h2>鬼针草</h2>
+                        <p>鬼针草
+                            [ gui zhen cao ]，
+                            中药材<br>
+                            别名：鬼钗草，鬼黄花，山东老鸦草，婆婆针，鬼骨针，盲肠草，引线包，粘花衣，家脱力草
+                            主要功效：清热解毒、散瘀消肿</p>
+                    </div>
+                    <div id="plant10" class="text-section">
+                        <h2>蒙桑</h2>
+                        <p>蒙桑（Morus mongolica (Bureau) C. K. Schneid.）是桑科、桑属的落叶乔木或灌木，无刺特性。其冬芽具有芽鳞，呈覆
+                            瓦状排列。叶子互生，边缘有锯齿，可以是全缘至深裂，基生叶脉有三至五出，侧脉羽状。托叶侧生，早落。花雌雄异株或
+                            同株异序，雌雄花序均为穗状。木材可供制家具、器具等一般用材，有一定的经济价值。
+                            </p>
+                    </div>
+                </div>
+            </div>
+            <div id ="budao" class="end">
+                <div id="shangfang" class="text-section">
+                    <h2><a href="https://www.example.com" target="_blank">上方山步道3D游览</a></h2>
+                </div>
+            </div>
+        </div><!-- /content-wrap -->
+
+    </div><!-- /container -->
+    <script src="js/classie.js"></script>
+    <script src="js/main3.js"></script>
+    <script>
+        const sections = document.querySelectorAll('.text-section');
+        const map = document.getElementById('current-map');
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    map.classList.add('fade-out'); // 添加淡出效果
+                    setTimeout(() => {
+                        if (entry.target.id === 'shangfang') {
+                            map.src = ''; // 清除图片
+                        } else {
+                            switch (entry.target.id) {
+                                case 'plant1':
+                                    map.src = 'img/plant/1.png';
+                                    break;
+                                case 'plant2':
+                                    map.src = 'img/plant/2.png';
+                                    break;
+                                case 'plant3':
+                                    map.src = 'img/plant/3.png';
+                                    break;
+                                case 'plant4':
+                                    map.src = 'img/plant/4.png';
+                                    break;
+                                case 'plant5':
+                                    map.src = 'img/plant/5.png';
+                                    break;
+                                case 'plant6':
+                                    map.src = 'img/plant/6.png';
+                                    break;
+                                case 'plant7':
+                                    map.src = 'img/plant/7.png';
+                                    break;
+                                case 'plant8':
+                                    map.src = 'img/plant/8.png';
+                                    break;
+                                case 'plant9':
+                                    map.src = 'img/plant/9.png';
+                                    break;
+                                case 'plant10':
+                                    map.src = 'img/plant/10.png';
+                                    break;
+                            }
+                        }
+                        map.classList.remove('fade-out'); // 移除淡出效果，添加淡入效果
+                    }, 500); // 延迟1秒以完成淡出动画
+                }
+            });
+        }, {
+            root: null, // 使用视口作为根
+            rootMargin: '0px',
+            threshold: 0.5 // 元素进入视口中间 50% 时触发
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
